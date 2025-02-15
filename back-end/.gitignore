@@ -1,0 +1,5 @@
+# Dossier des dépendances
+node_modules/
+
+# Environnement dotenv
+.env

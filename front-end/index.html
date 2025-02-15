@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b411003799.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/img/favicon.ico">
+    <title>XIV Random Achievement</title>
+</head>
+<body>
+    <img src="/img/logo.png" alt="XIV Random Achievement" id="logoMini">
+    <div class="home">
+        <i class="fa-solid fa-house"></i>
+    </div>
+
+    <img src="/img/logo.png" alt="XIV Random Achievement" id="logo">
+
+    <ul class="language-options">
+        <li><a href="#" data-lang="fr">FR</a></li>
+        <li><a href="#" data-lang="en">EN</a></li>
+        <li><a href="#" data-lang="de">DE</a></li>
+        <li><a href="#" data-lang="ja">JP</a></li>
+    </ul>
+
+    <div class="container-start" style="display: none;">
+        <div class="input-wrapper">
+            <input type="text" id="characterID" name="characterID" required>
+            <p class="error-text" style="display: none;"></p>
+        </div>
+        <button id="startButton" disabled></button>
+    </div>
+    
+    <div class="container-achievement" style="display: none;"></div>
+    <button id="nextButton" style="display: none;"></button>
+
+    <div class="random-achievement" style="display: none;"></div>
+
+    <script src="index.js"></script>
+</body>
+</html>
