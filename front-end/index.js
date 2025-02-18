@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () =>{
                 });
 
             })
-            .catch(error => {
+            .catch(error =>{
                 console.error(`Une erreur est survenue lors de la génération des hauts faits: ${error}`);
             });
     });
@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () =>{
 
                 randomAchievement.appendChild(achievementCard);
             })
-            .catch(error => {
+            .catch(error =>{
                 console.error(`Une erreur est survenue lors de la génération du haut fait: ${error}`);
             });
         });

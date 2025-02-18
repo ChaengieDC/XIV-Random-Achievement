@@ -26,7 +26,20 @@ app.use('/img', express.static(path.join(__dirname, '../data/img')));
 
 
 // Requêtes de type GET
-// Requête GET pour récupérer une liste de hauts faits aléatoires
+// Requête GET pour récupérer un haut fait aléatoire dans la liste reçue
+app.get('/getRandomAchievement', (req, res) =>{
+    const randomAchievements = req.session.randomAchievements;
+    
+    // Sélectionne un haut fait aléatoire dans la liste
+    const randomID = Math.floor(Math.random() * randomAchievements.length);
+    const randomAchievement = randomAchievements[randomID];
+
+    res.json(randomAchievement);
+});
+
+
+// Requêtes de type POST
+// Requête POST pour récupérer une liste de hauts faits aléatoires
 app.post('/getListOfRandomAchievements', async(req, res) =>{
     try{
         const lang = req.body.lang;
@@ -72,17 +85,6 @@ app.post('/getListOfRandomAchievements', async(req, res) =>{
         console.error(error);
         res.status(500).send(`Erreur lors de la récupération des hauts faits: ${error}`);
     }
-});
-
-// Requête GET pour récupérer un haut fait aléatoire dans la liste reçue
-app.get('/getRandomAchievement', (req, res) =>{
-    const randomAchievements = req.session.randomAchievements;
-    
-    // Sélectionne un haut fait aléatoire dans la liste
-    const randomID = Math.floor(Math.random() * randomAchievements.length);
-    const randomAchievement = randomAchievements[randomID];
-
-    res.json(randomAchievement);
 });
 
 
