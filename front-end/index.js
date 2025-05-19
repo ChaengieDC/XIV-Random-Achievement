@@ -241,6 +241,8 @@ document.addEventListener("DOMContentLoaded", () =>{
         });
 });
 
-document.querySelector(".home").addEventListener("click", () =>{
-    location.reload();
+document.querySelectorAll("#logoMini, .home").forEach(element =>{
+    element.addEventListener("click", () =>{
+        location.reload();
+    });
 });
