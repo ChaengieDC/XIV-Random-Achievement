@@ -142,6 +142,9 @@ document.addEventListener("DOMContentLoaded", () =>{
                     const achievementCardContent = document.createElement("div");
                     achievementCardContent.className = "achievement-card-content";
 
+                    const achievementInfo = document.createElement("div");
+                    achievementInfo.className = "achievement-info";
+
                     const icon = document.createElement("img");
                     icon.src = achievement.icon;
                     icon.alt = achievement.name;
@@ -157,10 +160,26 @@ document.addEventListener("DOMContentLoaded", () =>{
                     const description = document.createElement("p");
                     description.textContent = achievement.description;
 
+                    const hr = document.createElement("hr");
+
+                    const achievementCategory = document.createElement("div");
+                    achievementCategory.className = "achievement-category";
+
+                    const type = document.createElement("p");
+                    type.textContent = achievement.type.name;
+
+                    const category = document.createElement("p");
+                    category.textContent = achievement.category.name;
+
                     infoWrapper.appendChild(title);
                     infoWrapper.appendChild(description);
-                    achievementCardContent.appendChild(icon);
-                    achievementCardContent.appendChild(infoWrapper);
+                    achievementInfo.appendChild(icon);
+                    achievementInfo.appendChild(infoWrapper);
+                    achievementCategory.appendChild(type);
+                    achievementCategory.appendChild(category);
+                    achievementCardContent.appendChild(achievementInfo);
+                    achievementCardContent.appendChild(hr);
+                    achievementCardContent.appendChild(achievementCategory);
                     achievementCard.appendChild(achievementCardContent);
 
                     // Animation de fade-in avec un décalage pour chaque haut fait
@@ -207,6 +226,9 @@ document.addEventListener("DOMContentLoaded", () =>{
                 const achievementCardContent = document.createElement("div");
                 achievementCardContent.className = "achievement-card-content";
 
+                const achievementInfo = document.createElement("div");
+                achievementInfo.className = "achievement-info";
+
                 const icon = document.createElement("img");
                 icon.src = data.icon;
                 icon.alt = data.name;
@@ -222,10 +244,26 @@ document.addEventListener("DOMContentLoaded", () =>{
                 const description = document.createElement("p");
                 description.textContent = data.description;
 
+                const hr = document.createElement("hr");
+
+                const achievementCategory = document.createElement("div");
+                achievementCategory.className = "achievement-category";
+
+                const type = document.createElement("p");
+                type.textContent = data.type.name;
+
+                const category = document.createElement("p");
+                category.textContent = data.category.name;
+
                 infoWrapper.appendChild(title);
                 infoWrapper.appendChild(description);
-                achievementCardContent.appendChild(icon);
-                achievementCardContent.appendChild(infoWrapper);
+                achievementInfo.appendChild(icon);
+                achievementInfo.appendChild(infoWrapper);
+                achievementCategory.appendChild(type);
+                achievementCategory.appendChild(category);
+                achievementCardContent.appendChild(achievementInfo);
+                achievementCardContent.appendChild(hr);
+                achievementCardContent.appendChild(achievementCategory);
                 achievementCard.appendChild(achievementCardContent);
 
                 setTimeout(() =>{
