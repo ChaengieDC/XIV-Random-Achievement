@@ -65,10 +65,14 @@ function updateInfo(language){
         btn.style.boxShadow = applyShadow ? langData.boxShadow : "none";
 
         btn.addEventListener("mouseover", () =>{
-            btn.style.boxShadow = langData.hoverShadow;
+            if(!btn.disabled){
+                btn.style.boxShadow = langData.hoverShadow;
+            }
         });
         btn.addEventListener("mouseout", () =>{
-            btn.style.boxShadow = applyShadow ? langData.boxShadow : "none";
+            if(!btn.disabled){
+                btn.style.boxShadow = applyShadow ? langData.boxShadow : "none";
+            }
         });
     });
 }
@@ -197,6 +201,7 @@ function generateRandomAchievement(){
             if(data.exhausted){
                 const rerollButton = document.querySelector("#rerollButton");
                 rerollButton.setAttribute("disabled", true);
+                rerollButton.style.boxShadow = "none";
                 rerollButton.style.opacity = "50%";
                 return;
             }
