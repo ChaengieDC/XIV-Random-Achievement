@@ -17,7 +17,6 @@ body{
     background-color: rgb(26, 26, 36) !important;
     user-select: none;
     padding: 0;
-    margin-bottom: 100px !important;
 }
 
 /* Classe pour cacher les éléments */
@@ -191,6 +190,7 @@ input:-webkit-autofill{
 .error-text{
     font-family: Arial, Helvetica, sans-serif;
     color: #b63333;
+    margin: 0;
 }
 
 #startButton{
@@ -208,7 +208,7 @@ input:-webkit-autofill{
     transform: scale(0.8);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease-in-out;
 }
-#startButton.show, #nextButton.show{
+#startButton.show, #nextButton.show, #rerollButton.show, #restartButton.show{
     opacity: 1;
     transform: scale(1);
 }
@@ -246,6 +246,9 @@ input:-webkit-autofill{
 .container-achievement{
     grid-template-columns: repeat(5, 1fr);
     gap: 50px;
+    margin-bottom: 75px;
+}
+.random-achievement{
     margin-bottom: 75px;
 }
 
@@ -372,7 +375,10 @@ hr{
     to{ opacity: 1; transform: translateY(0); }
 }
 
-#nextButton{
+.reroll-buttons{
+    gap: 50px;
+}
+#nextButton, #rerollButton, #restartButton{
     font-family: Miedinger;
     font-weight: bold;
     font-size: 26px;
@@ -385,4 +391,7 @@ hr{
     transform: scale(0.8);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease-in-out;
     padding: 20.5px 3rem;
+}
+#nextButton{
+    margin-bottom: 125px;
 }

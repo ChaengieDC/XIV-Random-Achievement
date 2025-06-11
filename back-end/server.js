@@ -30,9 +30,26 @@ app.use('/img', express.static(path.join(__dirname, '../data/img')));
 app.get('/getRandomAchievement', (req, res) =>{
     const randomAchievements = req.session.randomAchievements;
     
+    // Tableau des hauts faits déjà tirés dans la liste reçue
+    if(!req.session.drawnAchievements){
+        req.session.drawnAchievements = [];
+    }
+
+    const drawnIDs = new Set(req.session.drawnAchievements.map(a => a.id));
+    // Filtrage des hauts faits pas encore tirés
+    const remainingIDs = randomAchievements.filter(ach => !drawnIDs.has(ach.id));
+
+    // Cas où tous les hauts faits de la liste ont été tirés
+    if(remainingIDs.length === 0){
+        return res.status(200).json({ exhausted: true });
+    }
+
     // Sélectionne un haut fait aléatoire dans la liste
-    const randomID = Math.floor(Math.random() * randomAchievements.length);
-    const randomAchievement = randomAchievements[randomID];
+    const randomID = Math.floor(Math.random() * remainingIDs.length);
+    const randomAchievement = remainingIDs[randomID];
+
+    // On le sauvegarde dans la session
+    req.session.drawnAchievements.push(randomAchievement);
 
     res.json(randomAchievement);
 });
