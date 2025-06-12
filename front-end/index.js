@@ -18,7 +18,8 @@ function updateInfo(language){
             buttons: ["COMMENCER", "SUIVANT", "RELANCER", "RECOMMENCER"],
             gradient: "linear-gradient(45deg, #ff002b, #ff75dc)",
             boxShadow: "0 0 20px rgba(255, 0, 43, 0.5), 0 0 40px rgba(255, 117, 220, 0.3)",
-            hoverShadow: "0 0 40px rgba(255, 0, 43, 0.7), 0 0 80px rgba(255, 117, 220, 0.5)"
+            hoverShadow: "0 0 40px rgba(255, 0, 43, 0.7), 0 0 80px rgba(255, 117, 220, 0.5)",
+            loadingText: "Chargement"
         },
         en: {
             placeholder: "CHARACTER ID",
@@ -26,7 +27,8 @@ function updateInfo(language){
             buttons: ["START", "NEXT", "REROLL", "RESTART"],
             gradient: "linear-gradient(45deg, #ff75dc, #5d02ff)",
             boxShadow: "0 0 20px rgba(255, 117, 220, 0.5), 0 0 40px rgba(93, 2, 255, 0.3)",
-            hoverShadow: "0 0 40px rgba(255, 117, 220, 0.7), 0 0 80px rgba(93, 2, 255, 0.5)"
+            hoverShadow: "0 0 40px rgba(255, 117, 220, 0.7), 0 0 80px rgba(93, 2, 255, 0.5)",
+            loadingText: "Loading"
         },
         de: {
             placeholder: "CHARAKTER ID",
@@ -34,7 +36,8 @@ function updateInfo(language){
             buttons: ["STARTEN", "WEITER", "NEU ZIEHEN", "NEU STARTEN"],
             gradient: "linear-gradient(45deg, #5d02ff, #00bcd4)",
             boxShadow: "0 0 20px rgba(93, 2, 255, 0.5), 0 0 40px rgba(0, 188, 212, 0.3)",
-            hoverShadow: "0 0 40px rgba(93, 2, 255, 0.7), 0 0 80px rgba(0, 188, 212, 0.5)"
+            hoverShadow: "0 0 40px rgba(93, 2, 255, 0.7), 0 0 80px rgba(0, 188, 212, 0.5)",
+            loadingText: "Laden"
         },
         ja: {
             placeholder: "キャラクターID",
@@ -42,7 +45,8 @@ function updateInfo(language){
             buttons: ["スタート", "次へ", "再抽選", "リスタート"],
             gradient: "linear-gradient(45deg, #00bcd4, #89ff00)",
             boxShadow: "0 0 20px rgba(0, 188, 212, 0.5), 0 0 40px rgba(137, 255, 0, 0.3)",
-            hoverShadow: "0 0 40px rgba(0, 188, 212, 0.7), 0 0 80px rgba(137, 255, 0, 0.5)"
+            hoverShadow: "0 0 40px rgba(0, 188, 212, 0.7), 0 0 80px rgba(137, 255, 0, 0.5)",
+            loadingText: "読み込み中"
         }
     };
 
@@ -75,6 +79,8 @@ function updateInfo(language){
             }
         });
     });
+
+    document.querySelector("#loadingText").textContent = langData.loadingText;
 }
 
 function clearAchievements(){
@@ -87,8 +93,8 @@ function clearAchievements(){
 function generateListOfRandomAchievements(){
     const inputValue = characterID.value;
 
-    const containerAchievement = document.querySelector(".container-achievement");
-    containerAchievement.style.display = "grid";
+    // On affiche la barre de chargement
+    document.querySelector("#loadingOverlay").style.display = "flex";
 
     fetch("/getListOfRandomAchievements", {
             method: "POST",
@@ -99,6 +105,9 @@ function generateListOfRandomAchievements(){
             return response.json();
         })
         .then(data =>{
+            // On cache la barre de chargement
+            document.querySelector("#loadingOverlay").style.display = "none";
+
             // Si l'ID du personnage est invalide
             if(data.success === false){
                 document.querySelector(".error-text").style.display = "block";
@@ -113,6 +122,8 @@ function generateListOfRandomAchievements(){
             document.querySelector(".random-achievement").style.display = "none";
             document.querySelector(".reroll-buttons").style.display = "none";
 
+            const containerAchievement = document.querySelector(".container-achievement");
+            containerAchievement.style.display = "grid";
             containerAchievement.innerHTML = ""; // Réinitialise le contenu
 
             data.forEach((achievement, index) =>{
@@ -188,10 +199,6 @@ function generateListOfRandomAchievements(){
         });
 }
 function generateRandomAchievement(){
-    const randomAchievement = document.querySelector(".random-achievement");
-    randomAchievement.style.display = "block";
-    document.querySelector(".reroll-buttons").style.display = "flex";
-
     fetch("/getRandomAchievement")
         .then(response =>{
             return response.json();
@@ -206,8 +213,6 @@ function generateRandomAchievement(){
                 return;
             }
 
-            clearAchievements();
-
             // On cache les éléments précédents
             document.querySelector(".container-achievement").classList.add("hidden");
             document.querySelector("#nextButton").classList.add("hidden");
@@ -219,6 +224,12 @@ function generateRandomAchievement(){
             rerollButton.classList.add("hidden");
             restartButton.classList.remove("show");
             restartButton.classList.add("hidden");
+
+            const randomAchievement = document.querySelector(".random-achievement");
+            randomAchievement.style.display = "block";
+            clearAchievements(); // Réinitialise le contenu
+
+            document.querySelector(".reroll-buttons").style.display = "flex";
             
             const achievementCard = document.createElement("div");
             achievementCard.className = "achievement-card hidden";
